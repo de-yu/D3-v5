@@ -5,8 +5,19 @@ scatter();
 
 function scatter()
 {
-        var x = d3.range(100).map(d3.randomUniform(0, 1));
-        var y =d3.range(100).map(d3.randomUniform(0, 1));
+        var x = d3.range(100).map(function(){
+            var r = d3.randomUniform(0, 1)();
+            return d3.format(".2")(r);
+        });
+        var y =d3.range(100).map(function(){
+            var r = d3.randomUniform(0, 1)();
+            return d3.format(".2")(r);
+        });
+        var label = d3.range(100).map(function(){
+            var r = d3.randomUniform(0, 1)();
+            return d3.format("d")(r);
+        });
+        console.log(label);
         
         var width = 960,
                 height = 540;
@@ -38,8 +49,25 @@ function scatter()
         dot.append('circle')
                 .data(x)
                 .attr("r" , "5")
+                .attr("fill" , function(d , index){
+                    return d3.schemeCategory10[label[index]];
+                })
+                .on("mouseover", handleMouseOver)
+                .on("mouseout" , handleMouseOut)
+                
+        function handleMouseOver(d, i) {
+
+
+            svg.append("text")
+                    .attr("id" , "t" + d.x + "-" + d.y + "-" + i)
+                    .attr("x" , 40)
+                    .attr("y" , 40)
+                    .text("(" + x[i] + " , " + y[i] + ")");
+          }
         
-        
+         function handleMouseOut(d, i) {
+            d3.select("#t" + d.x + "-" + d.y + "-" + i).remove();
+          }   
         
         svg.append("g")
         .attr("class", "x axis")
