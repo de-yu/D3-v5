@@ -44,6 +44,12 @@ var config = {
                 include: SRC_DIR,
             }
         ]
+    },
+    optimization:{
+      splitChunks:{
+        chunks: 'all',
+        name: "vendors",
+      }
     }
 }
 
