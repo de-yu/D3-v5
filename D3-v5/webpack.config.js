@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var DIST_DIR = path.resolve(__dirname, 'dist');
 var SRC_DIR = path.resolve(__dirname, "src");
 
-var graph_type = ['Histogram' , 'Scatter']
+var graph_type = ['Histogram' , 'Scatter' , 'Line']
 var graph = [];
 
 
@@ -17,7 +17,8 @@ for(var i=0;i<graph_type.length;i++ )
             template:SRC_DIR + "/html/graph.html",
             inject:false,
             filename:DIST_DIR +"/html/" + graph_type[i]+".html",
-            scriptPath:"\"/js/" +graph_type[i] + ".js\""
+            scriptPath:"\"/js/" +graph_type[i] + ".js\"" , 
+            vendorPath:"\"/js/vendors.js\""
         }));
 }
 
@@ -25,7 +26,8 @@ for(var i=0;i<graph_type.length;i++ )
 var config = {
     entry: {
         'Histogram':SRC_DIR + "/js/" +graph_type[0] + ".js",
-               'Scatter':SRC_DIR + "/js/" +graph_type[1] + ".js",
+        'Scatter':SRC_DIR + "/js/" +graph_type[1] + ".js",
+        'Line':SRC_DIR + "/js/" +graph_type[2] + ".js",
     },
     output: {
         path: DIST_DIR + "/js/",

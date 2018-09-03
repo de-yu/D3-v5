@@ -17,7 +17,6 @@ function scatter()
             var r = d3.randomUniform(0, 1)();
             return d3.format("d")(r);
         });
-        console.log(label);
         
         var width = 960,
                 height = 540;
@@ -30,7 +29,7 @@ function scatter()
         var xScale = d3.scaleLinear()
                 .domain([0, 1])
                 .range([0, width-50]);
-                var yScale = d3.scaleLinear()
+        var yScale = d3.scaleLinear()
                 .domain([0, 1])
                 .range([0, height-30]);
         var xAxis = d3.axisBottom(xScale);
