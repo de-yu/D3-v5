@@ -28,12 +28,12 @@ function line ()
 
     var line = d3.line();
 
-            var xScale = d3.scaleLinear()
-                .domain([0, 100])
-                .range([0, width-50]);
-        var yScale = d3.scaleLinear()
-                .domain([0, 100])
-                .range([0, height-30]);
+    var xScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([0, width-50]);
+    var yScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([0, height-30]);
 
     line.x(function (d, i)
     {
