@@ -30,10 +30,10 @@ function line ()
 
     var xScale = d3.scaleLinear()
             .domain([0, 100])
-            .range([0, width-50]);
+            .range([0, width]);
     var yScale = d3.scaleLinear()
-            .domain([0, 100])
-            .range([0, height-30]);
+            .domain([0, 50])
+            .range([0, height]);
 
     line.x(function (d, i)
     {
@@ -43,19 +43,14 @@ function line ()
     {
         return yScale(d.y);
     });
-
-
+    
+    console.log(line(data));
+    //path 有變更
     svg.append('path')
-            .attr( "d" ,  function ()
-                {
-                    return line(data);
-                })
-            .style({
-                //path颜色：steelblue
-                "stroke": "steelblue",
-                //path粗细：5
-                "stroke-width": 5,
-                //path填充：white
-                "fill": "white"
-            });
+    .attr( "d" ,  function ()
+        {
+            return line(data);
+        })
+    .style( "stroke" , "steelblue")
+    .style("fill" , "white");
 }
