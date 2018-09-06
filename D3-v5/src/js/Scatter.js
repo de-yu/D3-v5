@@ -1,25 +1,16 @@
 
 var d3 = require("d3");
+import rand from './RandomData';
 
 scatter();
 
 function scatter()
 {
-        var x = d3.range(100).map(function(){
-            var r = d3.randomUniform(0, 1)();
-            return d3.format(".2")(r);
-        });
-        var y =d3.range(100).map(function(){
-            var r = d3.randomUniform(0, 1)();
-            return d3.format(".2")(r);
-        });
-        var label = d3.range(100).map(function(){
-            var r = d3.randomUniform(0, 1)();
-            return d3.format("d")(r);
-        });
+        var x = rand.randomFloat(100,0,1);
+        var y =rand.randomFloat(100,0,1);
+        var label = rand.randomInt(100,0,1);
         
-        var width = 960,
-                height = 540;
+        var width = 960,height = 540;
         
         var svg = d3.select("body").append("svg")
         .attr("width", width)
@@ -55,7 +46,6 @@ function scatter()
                 .on("mouseout" , handleMouseOut)
                 
         function handleMouseOver(d, i) {
-
 
             svg.append("text")
                     .attr("id" , "t" + d.x + "-" + d.y + "-" + i)
