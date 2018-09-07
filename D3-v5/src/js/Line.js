@@ -53,4 +53,16 @@ function line ()
         })
     .style( "stroke" , "steelblue")
     .style("fill" , "white");
+    
+            var xAxis = d3.axisBottom(xScale);
+        var yAxis = d3.axisLeft(yScale);
+        svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(30," + (height-20) + ")")
+        .call(xAxis);
+
+        svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(30,10)")
+        .call(yAxis);
 }

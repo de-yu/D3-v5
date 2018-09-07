@@ -22,7 +22,7 @@ function scatter()
                 .range([0, width-50]);
         var yScale = d3.scaleLinear()
                 .domain([0, 1])
-                .range([0, height-30]);
+                .range([height-30 , 0]);
         var xAxis = d3.axisBottom(xScale);
         var yAxis = d3.axisLeft(yScale);
         
