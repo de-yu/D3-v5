@@ -10,19 +10,20 @@ function scatter()
         var y =rand.randomFloat(100,0,1);
         var label = rand.randomInt(100,0,1);
         
-        var width = 960,height = 540;
+        var width = 960,height = 540 , padding = 30;
         
         var svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
+        .attr("width", width+padding*2)
+        .attr("height", height+padding*2).append("g");
+        
+            svg.attr("transform" ,"translate(30,30)");
 
         var xScale = d3.scaleLinear()
                 .domain([0, 1])
-                .range([0, width-50]);
+                .range([0, width]);
         var yScale = d3.scaleLinear()
                 .domain([0, 1])
-                .range([height-30 , 0]);
+                .range([height , 0]);
         var xAxis = d3.axisBottom(xScale);
         var yAxis = d3.axisLeft(yScale);
         
@@ -33,7 +34,7 @@ function scatter()
                 .attr("class", "dot")
                 .attr("transform", function (d , index)
                 {
-                    return "translate(" +( xScale(d)+30) + "," +(yScale(y[index])+10) + ")";
+                    return "translate(" +xScale(d) + "," +yScale(y[index]) + ")";
                 });
 
         dot.append('circle')
@@ -60,11 +61,11 @@ function scatter()
         
         svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(30," + (height-20) + ")")
+        .attr("transform", "translate(0,540)")
         .call(xAxis);
 
         svg.append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(30,10)")
+        .attr("transform", "translate(0,0)")
         .call(yAxis);
 }
