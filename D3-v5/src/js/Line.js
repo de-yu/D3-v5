@@ -1,5 +1,5 @@
 var d3 = require("d3");
-import {D3init} from './D3Util'
+import {D3init} from './util/D3Util'
         line();
 
 function line() {
@@ -36,7 +36,7 @@ function line() {
             return line(data);
           })
           .style("stroke","steelblue")
-          .style("fill","white");
+          .style("fill","none");
 
   var dot = svg.selectAll(".dot")
           .data(x)

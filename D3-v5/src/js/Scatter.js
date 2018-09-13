@@ -1,6 +1,6 @@
 
 var d3 = require("d3");
-import rand from './RandomData';
+import rand from './util/RandomData';
 
 scatter();
 
