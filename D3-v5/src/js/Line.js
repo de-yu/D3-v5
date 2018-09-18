@@ -1,6 +1,8 @@
 var d3 = require("d3");
 import {D3init} from './util/D3Util'
-        line();
+
+
+line();
 
 function line() {
   var x = d3.range(0,100,1);

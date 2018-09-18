@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var DIST_DIR = path.resolve(__dirname, 'dist');
 var SRC_DIR = path.resolve(__dirname, "src");
 
-var graph_type = ['Histogram' , 'Scatter' , 'Line' , 'Pie']
+var graph_type = ['Histogram' , 'Scatter' , 'Line' , 'Pie' , 'Area']
 var graph = [];
 
 
@@ -29,6 +29,7 @@ var config = {
         'Scatter':SRC_DIR + "/js/" +graph_type[1] + ".js",
         'Line':SRC_DIR + "/js/" +graph_type[2] + ".js",
         'Pie':SRC_DIR + "/js/" +graph_type[3] + ".js",
+        'Area':SRC_DIR + "/js/" +graph_type[4] + ".js",
     },
     output: {
         path: DIST_DIR + "/js/",
