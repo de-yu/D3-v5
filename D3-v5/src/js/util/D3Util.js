@@ -16,6 +16,18 @@ var d3 = require("d3");
       return d3.scaleLinear()
             .domain([min, max])
             .range([height , 0]);
+    },
+    appendxAxis : (svg, height , xAxis) =>{
+          svg.append("g")
+          .attr("class","x axis")
+          .attr("transform","translate(0,"+ height+")")
+          .call(xAxis);
+    },
+    appendyAxis :(svg , yAxis) =>{
+          svg.append("g")
+          .attr("class","y axis")
+          .attr("transform","translate(0,0)")
+          .call(yAxis);
     }
 }
 
