@@ -2,7 +2,8 @@
 var d3 = require("d3");
 import rand from './util/RandomData';
 import {D3init} from './util/D3Util'
-        scatter();
+
+scatter();
 
 function scatter ()
 {

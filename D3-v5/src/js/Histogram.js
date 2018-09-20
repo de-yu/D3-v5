@@ -1,64 +1,61 @@
 
 var d3 = require("d3");
+import rand from './util/RandomData';
+import {D3init} from './util/D3Util'
 
-his();
+        histogram();
 
-function his()
+function histogram ()
 {
     // d3 random 改變
     var values = d3.range(1000).map(d3.randomNormal(0.5, 0.1));
 
-var width = 960,
-        height = 500,
-        padding = 6;
+    var width = 960,
+            height = 540,
+            padding = 30;
 
-//  scale 有改變
-var x = d3.scaleLinear()
-        .domain([0, 1])
-        .range([0, width]);
+    var svg = d3.select("body").append("svg")
+    svg = D3init.init(svg, width, height, padding)
 
-// layout.histogram 改變
-var data = d3.histogram()
-    .domain(x.domain())
-    .thresholds(x.ticks(20))(values);
+    var xScale = D3init.xScale(0, 1, width);
 
-//  scale 有改變
-var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function (d)
+
+    var data = d3.histogram()
+            .domain(xScale.domain())
+            .thresholds(xScale.ticks(20))(values);
+
+
+    var yScale = d3.scaleLinear()
+            .domain([0,d3.max(data, function (d)
+                {
+                    return d.length;
+                })])
+            .range([height,0]);
+
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+
+    D3init.appendxAxis(svg, height, xAxis)
+    D3init.appendyAxis(svg, yAxis)
+
+    var bar = svg.selectAll(".bar")
+            .data(data)
+            .enter().append("g")
+            .attr("class", "bar")
+            .attr("transform", function (d, index)
             {
-                return d.length;
-            })])
-        .range([0 , height]);
-// axis 改變
-var xAxis = d3.axisBottom(x);
+                return "translate(" + xScale(index * 0.05) + "," + yScale(d.length) + ")";
+            });
 
-var svg = d3.select("body").append("svg")
-        .attr("width", width + 30)
-        .attr("height", height + 30)
-        .append("g")
-        .attr("transform", "translate(" + padding * 2 + "," + padding + ")");
+    bar.append("rect")
+            .attr("width", width / data.length)
+            .attr("height", function (d)
+            {
+                return  (height-yScale(d.length));
+            }).attr("fill", function (d, index)
+            {
 
-var bar = svg.selectAll(".bar")
-        .data(data)
-        .enter().append("g")
-        .attr("class", "bar")
-        .attr("transform", function (d , index)
-        {
-            return "translate(" + x(index * 0.05) + "," +(height -  y(d.length)) + ")";
-        });
-        
-        bar.append("rect")
-        .attr("width", width/data.length)
-        .attr("height", function (d)
-        {
-            return  y(d.length)+ 5;
-        }).attr("fill" , function(d , index){
+                return d3.interpolateRdYlGn(index / data.length);
+            });
 
-            return d3.interpolateRdYlGn(index/data.length);
-        });
-
-        svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(" + padding + "," + height + ")")
-        .call(xAxis);
 }
