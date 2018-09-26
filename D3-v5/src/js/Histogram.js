@@ -22,7 +22,7 @@ function histogram ()
 
     var data = d3.histogram()
             .domain(xScale.domain())
-            .thresholds(xScale.ticks(20))(values);
+            .thresholds(xScale.ticks(10))(values);
 
 
     var yScale = d3.scaleLinear()
@@ -44,7 +44,7 @@ function histogram ()
             .attr("class", "bar")
             .attr("transform", function (d, index)
             {
-                return "translate(" + xScale(index * 0.05) + "," + yScale(d.length) + ")";
+                return "translate(" + xScale(index * 0.1) + "," + yScale(d.length) + ")";
             });
 
     bar.append("rect")

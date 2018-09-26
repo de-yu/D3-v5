@@ -3,13 +3,20 @@ var d3 = require("d3");
 import rand from './util/RandomData';
 import {D3init} from './util/D3Util'
 
-scatter();
+        scatter();
 
 function scatter ()
 {
     var x = rand.randomFloat(100, 0, 1);
     var y = rand.randomFloat(100, 0, 1);
+
     var label = rand.randomInt(100, 0, 1);
+
+    var point = [];
+    for (var i = 0; i < 100; i++)
+    {
+        point.push({x: x[i], y: y[i], label: label[i]})
+    }
 
     var width = 960, height = 540, padding = 30;
 
@@ -33,27 +40,36 @@ function scatter ()
             });
 
     dot.append('circle')
-            .data(x)
+            .data(point)
             .attr("r", "5")
             .attr("fill", function (d, index)
             {
-                return d3.schemeCategory10[label[index]];
+                return d3.schemeCategory10[d.label];
             })
             .on("mouseover", handleMouseOver)
             .on("mouseout", handleMouseOut)
 
     function handleMouseOver (d, i)
     {
-        svg.append("text")
-                .attr("id", "t" + d.x + "-" + d.y + "-" + i)
-                .attr("x", 40)
-                .attr("y", 40)
-                .text("(" + x[i] + " , " + y[i] + ")");
+        var text = "(" + d.x +"," + d.y+")";
+        svg.append("g")
+                .attr("id", "text")
+                .attr("transform", function ()
+                {
+                    return "translate(" + (xScale(d.x)-25) + "," + (yScale(d.y)-30) + ")";
+                });
+        svg.select("#text")
+                .append("text")
+                .text(()=>(text))
+                .attr("textLength" ,  text.length*6)
+                .attr("y" , 15)
+                .attr("fill", "#000");
+
     }
 
     function handleMouseOut (d, i)
     {
-        d3.select("#t" + d.x + "-" + d.y + "-" + i).remove();
+        d3.select("#text").remove();
     }
 
     svg.append("g")

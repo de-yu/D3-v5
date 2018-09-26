@@ -7,8 +7,8 @@ import {D3init} from './util/D3Util'
 
 function area ()
 {
-     var x = d3.range(0,100,1);
-  var y = d3.range(100).map(function() {
+     var x = d3.range(0,101,1);
+  var y = d3.range(101).map(function() {
     var r = d3.randomUniform(0,50)();
     return d3.format("d")(r);
   });
@@ -22,29 +22,30 @@ function area ()
     var width = 960,height = 540,padding = 30;
     //追加svg元素
     var svg = d3.select("body").append("svg")
-            .datum(data)
-            .attr("width", 960)
-            .attr("height", 500)
-            .append("g")
-            .attr("transform", "translate(10,10)");
+    svg = D3init.init(svg, width, height, padding)
     
     
-  var xScale = D3init.xScale(0,100,width);
-  var yScale = D3init.yScale(0,50,height);
+    var xScale = D3init.xScale(0, 100, width);
+    var yScale = D3init.yScale(0, 50, height);
+
+    var xAxis = d3.axisBottom(xScale);
+    var yAxis = d3.axisLeft(yScale);
+    D3init.appendxAxis(svg, height, xAxis)
+    D3init.appendyAxis(svg, yAxis)
   
     //新建面积生成器	
     var area = d3.area()
             .x(function (d)
             {
                 return xScale(d.x);
-            })//x坐标
+            })
             .y1(function (d)
             {
                 return yScale(d.y);
             })//顶线
-            .y0(500);//基线
+            .y0(height);//基线
     //追加路径数据
     svg.append("path")
             .attr("fill", "steelblue")
-            .attr("d", area);
+            .attr("d", () => (area(data)));
 }
