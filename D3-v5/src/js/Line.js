@@ -21,7 +21,7 @@ function line ()
     }
 
     var width = 960,
-            height = 540, 
+            height = 540,
             padding = 30;
 
     var svg = d3.select("body").append("svg")
@@ -39,12 +39,12 @@ function line ()
 
     line.x((d, i) => (xScale(d.x)));
     line.y((d, i) => (yScale(d.y)));
-
+    
     //path 有變更
     svg.append('path')
             .attr("d", () => (line(data)))
             .style("stroke", "steelblue")
-            .style("fill", "none");
+            .style("fill", "none")
 
     var dot = svg.selectAll(".dot")
             .data(x)
@@ -59,4 +59,25 @@ function line ()
     dot.append('circle')
             .data(x)
             .attr("r", "2")
+
+    console.log(svg.selectAll(".dot"));
+
+
+    function handleMouseOver (d, i)
+    {
+  var point = d3.mouse(this);
+  console.log(point);
+
+    }
+   function handleMouseMove (d, i)
+    {
+  var point = d3.mouse(this);
+  console.log(point);
+
+    }
+
+    function handleMouseOut (d, i)
+    {
+
+    }
 }

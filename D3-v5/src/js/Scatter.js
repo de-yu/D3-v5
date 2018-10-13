@@ -3,7 +3,7 @@ var d3 = require("d3");
 import rand from './util/RandomData';
 import {D3init} from './util/D3Util'
 
-        scatter();
+scatter();
 
 function scatter ()
 {
@@ -49,20 +49,53 @@ function scatter ()
             .on("mouseover", handleMouseOver)
             .on("mouseout", handleMouseOut)
 
+    var l = ['table', 'chair'];
+
+    var label = svg.append('g')
+            .attr("transform", function (d, index)
+            {
+                return "translate(800,0)";
+            });
+    label.append('rect')
+            .attr('width', 100)
+            .attr('height', 50)
+            .style('stroke', 'blue')
+            .style('fill', 'white')
+            .style('filter' , "drop-shadow(2px 2px 1px rgba(0,0,0,0.3)");
+
+    label = label.selectAll(".label")
+            .data(l)
+            .enter()
+            .append('g');
+
+    label.append("circle")
+            .attr("r", "5")
+            .attr("fill", function (d , index)
+            {
+                return d3.schemeCategory10[index];
+            })
+            .attr("cy", (d, index) => ( 15 +20 * index))
+                .attr("cx", '20');
+
+    label.append("text")
+            .text((d) => (d))
+            .attr("y", (d, index) => (20+20 * index))
+                .attr("x", '50')
+
+
     function handleMouseOver (d, i)
     {
-        var text = "(" + d.x +"," + d.y+")";
+        var text = "(" + d.x + "," + d.y + ")";
         svg.append("g")
                 .attr("id", "text")
                 .attr("transform", function ()
                 {
-                    return "translate(" + (xScale(d.x)-25) + "," + (yScale(d.y)-30) + ")";
+                    return "translate(" + (xScale(d.x) - 25) + "," + (yScale(d.y) - 30) + ")";
                 });
         svg.select("#text")
                 .append("text")
-                .text(()=>(text))
-                .attr("textLength" ,  text.length*6)
-                .attr("y" , 15)
+                .text(() => (text))
+                .attr("y", 15)
                 .attr("fill", "#000");
 
     }
