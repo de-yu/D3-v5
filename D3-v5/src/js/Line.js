@@ -7,7 +7,7 @@ line();
 
 function line ()
 {
-    var x = d3.range(0, 100, 1);
+    var x = d3.range(1, 101, 1);
     var y = d3.range(100).map(function ()
     {
         var r = d3.randomUniform(0, 50)();
@@ -39,45 +39,68 @@ function line ()
 
     line.x((d, i) => (xScale(d.x)));
     line.y((d, i) => (yScale(d.y)));
-    
+
     //path 有變更
     svg.append('path')
             .attr("d", () => (line(data)))
             .style("stroke", "steelblue")
             .style("fill", "none")
-
-    var dot = svg.selectAll(".dot")
+    var point = svg.append('g')
+            .attr("id" , "point")
+    var dot = point.selectAll(".dot")
             .data(x)
             .enter()
             .append('g')
-            .attr("class", "dot")
-            .attr("transform", function (d, index)
-            {
-                return "translate(" + (xScale(d)) + "," + (yScale(y[index])) + ")";
-            });
+            .attr("class", "dot");
+          
 
     dot.append('circle')
-            .data(x)
-            .attr("r", "2")
+            .data(data)
+            .attr("r", "2") 
+            .attr("transform", function (d, index)
+            {
+                return "translate(" + (xScale(d.x)) + "," + (yScale(d.y)) + ")";
+            });
+    
+    dot.append('rect')
+            .data(data)
+            .attr('x' , function(d , index){
+                return xScale(d.x)-4.8;
+            })
+            .attr('y' , '0')
+            .attr('height' , () =>(height))
+            .attr('width' , () =>(width/data.length))
+            .attr('fill-opacity' , '0.0')
+            .on("mouseover", handleMouseOver)
+            .on("mouseout", handleMouseOut)
 
     console.log(svg.selectAll(".dot"));
 
 
-    function handleMouseOver (d, i)
+        function handleMouseOver (d, i)
     {
-  var point = d3.mouse(this);
-  console.log(point);
-
-    }
-   function handleMouseMove (d, i)
-    {
-  var point = d3.mouse(this);
-  console.log(point);
+        var text = "(" + d.x + "," + d.y + ")";
+        svg.append("g")
+                .attr("id", "text")
+                .attr("transform", function ()
+                {
+                 return "translate(" + (xScale(d.x)) + "," + (yScale(d.y)) + ")";
+                });
+        svg.select("#text")
+                .append("text")
+                .text(() => (text))
+                .attr("fill", "#000");
+        
+        svg.select("#point :nth-child(" + (i+1) + ") circle")
+            .attr("r", "5") 
 
     }
 
     function handleMouseOut (d, i)
     {
 
+        d3.select("#text").remove();
+              svg.select("#point :nth-child(" + (i+1) + ") circle")
+            .attr("r", "2") 
     }
 }
