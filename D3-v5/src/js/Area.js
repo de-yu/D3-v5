@@ -3,7 +3,7 @@ var d3 = require("d3");
 import {D3init} from './util/D3Util'
 
 
-        area();
+area();
 
 function area ()
 {

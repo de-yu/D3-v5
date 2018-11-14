@@ -1,7 +1,7 @@
 var d3 = require("d3");
 
 import {D3init} from './util/D3Util'
-        import rand from './util/RandomData';
+import rand from './util/RandomData';
 
 line();
 
