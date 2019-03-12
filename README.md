@@ -15,13 +15,13 @@
 
 使用 webpack-dev-server 啟動
 
-localhost:7000
+http://localhost:7000
 
         npm run dev
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [D3.js] (https://d3js.org/) - 資料視覺化 SVG 繪製框架
+* [webpack](https://webpack.js.org/) - js打包工具
+
 
