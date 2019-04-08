@@ -17,8 +17,8 @@ for (var i = 0;i < graph_type.length;i++)
             template:SRC_DIR + "/html/graph.html",
             inject:false,
             filename:DIST_DIR + "/html/" + graph_type[i] + ".html",
-            scriptPath:"\"/js/" + graph_type[i] + ".js\"",
-            vendorPath:"\"/js/vendors.js\""
+            scriptPath:"\"../js/" + graph_type[i] + ".js\"",
+            vendorPath:"\"../js/vendors.js\""
           }));
 
   entry[graph_type[i]] = SRC_DIR + "/js/" + graph_type[i] + ".js";
