@@ -21,12 +21,15 @@ http://localhost:7000
 
 ## Built With
 
-* [D3.js] (https://d3js.org/) - 資料視覺化 SVG 繪製框架
+* [D3.js](https://d3js.org/) - 資料視覺化 SVG 繪製框架
 * [webpack](https://webpack.js.org/) - js打包工具
 
 
 ## 執行網址
 
-* [webpack](https://webpack.js.org/) - js打包工具
-* [webpack](https://webpack.js.org/) - js打包工具
-* [webpack](https://webpack.js.org/) - js打包工具
+* [面積圖](https://de-yu.github.io/D3-v5/D3-v5/dist/html/Area.html)
+* [直方圖](https://de-yu.github.io/D3-v5/D3-v5/dist/html/Histogram.html)
+* [線圖](https://de-yu.github.io/D3-v5/D3-v5/dist/html/Line.html)
+* [圓餅圖](https://de-yu.github.io/D3-v5/D3-v5/dist/html/Pie.html)
+* [散點圖](https://de-yu.github.io/D3-v5/D3-v5/dist/html/Scatter.html)
+
