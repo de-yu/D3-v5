@@ -6,7 +6,7 @@ export default {
   
         return d3.range(numSum).map( () => {
             var r = d3.randomUniform(min, max)();
-            return d3.format("d")(r);
+            return parseInt(d3.format("d")(r));
         });
     },
     randomFloat: (numSum , min , max) => {
