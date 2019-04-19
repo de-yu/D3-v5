@@ -25,6 +25,9 @@ function line ()
             padding = 30;
 
     var svg = d3.select("body").append("svg")
+        var defs = d3.select("svg").append('defs')
+        
+
     svg = D3init.init(svg, width, height, padding)
 
     var xScale = D3init.xScale(0, 100, width);
@@ -35,6 +38,19 @@ function line ()
     D3init.appendxAxis(svg, height, xAxis)
     D3init.appendyAxis(svg, yAxis)
 
+        defs.append('marker')
+                        .attr("id" , "dot")
+                .attr('markerWidth' , 5)
+                .attr('markerHeight' , 5)
+                .attr("viewBox" , "0 0 10 10")
+                .attr('refX' , 5)
+                .attr('refY' , 5)
+                .append("circle")
+                .attr("cx" , 5)
+                .attr("cy" , 5)
+                .attr("r" , 5)
+                .attr("fill" , "red");
+        
     var line = d3.line();
 
     line.x((d, i) => (xScale(d.x)));
@@ -42,9 +58,13 @@ function line ()
 
     //path 有變更
     svg.append('path')
+            .attr("marker-start","url(#dot)")
+            .attr("marker-mid","url(#dot)")
+            .attr("marker-end","url(#dot)")
             .attr("d", () => (line(data)))
             .style("stroke", "steelblue")
-            .style("fill", "none")
+            .style("fill", "none");
+    
     var point = svg.append('g')
             .attr("id" , "point")
     var dot = point.selectAll(".dot")
@@ -53,7 +73,7 @@ function line ()
             .append('g')
             .attr("class", "dot");
           
-
+/*
     dot.append('circle')
             .data(data)
             .attr("r", "2") 
@@ -61,7 +81,7 @@ function line ()
             {
                 return "translate(" + (xScale(d.x)) + "," + (yScale(d.y)) + ")";
             });
-    
+    */
     dot.append('rect')
             .data(data)
             .attr('x' , function(d , index){
